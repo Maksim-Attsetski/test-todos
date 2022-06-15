@@ -1,0 +1,17 @@
+
+
+@mixin for-largePC {
+  @media (min-width: 1201px) { @content }
+}
+@mixin for-pc {
+  @media (max-width: 1200px) { @content }
+}
+@mixin for-laptop {
+  @media (max-width: 992px) { @content }
+}
+@mixin for-table {
+  @media (max-width: 768px) { @content }
+}
+@mixin for-iphone {
+  @media (max-width: 380px) { @content }
+}

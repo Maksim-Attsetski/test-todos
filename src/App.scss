@@ -1,0 +1,44 @@
+@import '~antd/dist/antd.css';
+@import './helpers/media';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--headerHeight);
+  main {
+    flex: 0 0 auto;
+  }
+  .page {
+    min-height: calc(100vh - var(--headerHeight));
+  }
+}
+
+.container {
+  max-width: 1200px;
+  padding: 0 3vmin;
+  margin: 0 auto;
+  @include for-largePC {
+    min-width: 1200px;
+  }
+  @include for-pc {
+    min-width: 992px;
+  }
+  @include for-laptop {
+    min-width: 750px;
+  }
+  @include for-table {
+    min-width: 350px;
+  }
+  @include for-iphone {
+    min-width: 300px;
+  }
+}
+
+:focus {
+  outline: none;
+}
+
+:root {
+  --headerHeight: 64px;
+}

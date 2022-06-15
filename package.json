@@ -1,6 +1,7 @@
 {
   "name": "todos",
   "version": "0.1.0",
+  "homepage": "https://maksim-attsetski.github.io/test-todos/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",

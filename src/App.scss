@@ -10,34 +10,61 @@
     flex: 0 0 auto;
   }
   .page {
+    padding: 1rem 0;
     min-height: calc(100vh - var(--headerHeight));
   }
 }
 
 .container {
-  max-width: 1200px;
+  width: clamp(1000px, 90vw, 1200px);
   padding: 0 3vmin;
   margin: 0 auto;
   @include for-largePC {
-    min-width: 1200px;
+    width: clamp(1200px, 90vw, 2000px);
   }
   @include for-pc {
-    min-width: 992px;
+    width: clamp(990px, 90vw, 1100px);
   }
   @include for-laptop {
-    min-width: 750px;
+    width: clamp(760px, 90vw, 970px);
   }
   @include for-table {
-    min-width: 350px;
+    width: clamp(370px, 90vw, 750px);
   }
   @include for-iphone {
-    min-width: 300px;
+    width: clamp(300px, 90vw, 350px);
   }
 }
 
 :focus {
   outline: none;
 }
+
+.ant-timeline-item-last > .ant-timeline-item-content {
+  min-height: 0; // отступ у последнего элемента в dropdown
+}
+.ant-timeline-item {
+  padding-bottom: 0;   // пункты в timeline
+  & + & {
+    padding-top: 10px;
+  }
+}
+.ant-progress-circle .ant-progress-text {
+  padding: 0.5rem;
+}
+.ant-form-item {
+  justify-content: space-between; // элементы формы
+  .ant-col-sm-offset-4 {
+    margin-left: 0;
+  }
+}
+
+.header {
+  .ant-menu-dark.ant-menu-horizontal > .ant-menu-item, .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
+    padding: 0 3vmin; // ссылки в header
+  }
+}
+
 
 :root {
   --headerHeight: 64px;

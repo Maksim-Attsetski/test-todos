@@ -1,69 +1,38 @@
-import React, {ChangeEvent, FC} from 'react';
-import {Button, Col, notification, Row} from "antd";
+import React, {FC} from 'react';
+import {Button, Col, Row} from "antd";
 import {Link} from "react-router-dom";
 import {routeNames} from "../routes/routeNames";
-import {ITodos} from "../types/global";
-import {useTypedDispatch} from "../hooks/redux";
+import {ITodo} from "../types/global";
+import {useTypedDispatch, useTypedSelector} from "../hooks/redux";
 import {todoSliceAction} from "../redux/slices/todosSlice";
+import TodosFormChange from "./TodosFormChange";
 
 interface IProps {
-    todo: ITodos,
+    todo: ITodo,
 }
 
 const TodoBtns: FC<IProps> = ({todo}) => {
+    const {lang} = useTypedSelector(state => state.lang)
     const dispatch = useTypedDispatch()
-    const {changeTodo, deleteTodo} = todoSliceAction
-
-    const changeTodoDone = (event: ChangeEvent<HTMLInputElement>) => {
-
-        dispatch(changeTodo({
-            ...todo,
-            isDone: event.target.checked,
-        }))
-    }
-    const changeFullTodo = () => {
-        const title: string | null = prompt('title')
-        const description: string | null = prompt('description')
-
-        if (!title) {
-            notification.open({message: 'invalid title'})
-        } else if (!description) {
-            notification.open({message: 'invalid description'})
-        } else {
-            dispatch(changeTodo({
-                ...todo,
-                title,
-                description,
-            }))
-        }
-
-    }
+    const {deleteTodo} = todoSliceAction
 
     return (
         <Row gutter={[16, 16]} align={'middle'} justify={'space-around'}>
-            <Col><input
-                type={'checkbox'}
-                checked={todo.isDone}
-                onChange={changeTodoDone}
-            /></Col>
             <Col>
                 <Button type={'primary'}
-                        disabled={todo.isDone}
                         onClick={() => dispatch(deleteTodo(todo.id))}
-                >Delete</Button>
+                >{lang.delete}
+                </Button>
             </Col>
             <Col>
                 <Button type={'primary'}
                         disabled={todo.isDone}
-                ><Link to={routeNames.TODOS + todo.id}>
-                    Open
-                </Link></Button>
+                >
+                    <Link to={routeNames.TODOS + todo.id}>{lang.open}</Link>
+                </Button>
             </Col>
             <Col>
-                <Button type={'primary'}
-                        disabled={todo.isDone}
-                        onClick={changeFullTodo}
-                >Change</Button>
+                <TodosFormChange todo={todo}/>
             </Col>
         </Row>
     );

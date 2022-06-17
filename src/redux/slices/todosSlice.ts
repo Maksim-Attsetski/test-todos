@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ITodos} from "../../types/global";
+import {ITodo} from "../../types/global";
 
 interface IState {
-    todos: ITodos[]
+    todos: ITodo[]
 
 }
 
@@ -10,7 +10,7 @@ const initialState: IState = {
     todos: []
 }
 
-const setLocStorage = (item: ITodos[] | ITodos) => localStorage.setItem('todos', JSON.stringify(item))
+const setLocStorage = (item: ITodo[] | ITodo) => localStorage.setItem('todos', JSON.stringify(item))
 
 const todosSlice = createSlice({
     name: 'todosSlice',
@@ -23,28 +23,20 @@ const todosSlice = createSlice({
                 setLocStorage(state.todos)
             }
         },
-        createTodo: (state, action: PayloadAction<ITodos>) => {
+        createTodo: (state, action: PayloadAction<ITodo>) => {
             state.todos = [...state.todos, action.payload]
             setLocStorage(state.todos)
         },
-        changeTodo: (state, action: PayloadAction<ITodos>) => {
-            state.todos = [...state.todos].map((todo: ITodos) =>
+        changeTodo: (state, action: PayloadAction<ITodo>) => {
+            state.todos = [...state.todos].map((todo: ITodo) =>
                 (action.payload.id === todo.id) ? action.payload : todo
             )
             setLocStorage(state.todos)
         },
         deleteTodo: (state, action: PayloadAction<string>) => {
             state.todos = [...state.todos]
-                .filter((todo: ITodos) => todo.id !== action.payload)
+                .filter((todo: ITodo) => todo.id !== action.payload)
             setLocStorage(state.todos)
-        },
-        filterTodoByDone: (state, action: PayloadAction<string>) => {
-            if(action.payload === 'All todos') {
-
-            }
-            // state.todos = [...state.todos]
-            //     .filter((todo: ITodos) => todo.id !== action.payload)
-            // setLocStorage(state.todos)
         },
     }
 })

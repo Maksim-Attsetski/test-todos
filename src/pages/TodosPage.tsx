@@ -1,38 +1,40 @@
 import React, {FC, ReactElement, useEffect, useMemo, useState} from 'react';
 import AnimPage from "../components/H-O-C/AnimPage";
-import {Button, Col, Divider, Dropdown, Layout, Menu, Row, Space} from "antd";
+import {Col, Divider, Dropdown, Empty, Layout, Menu, Progress, Row, Space} from "antd";
 import {todoSliceAction} from "../redux/slices/todosSlice";
 import {useTypedDispatch, useTypedSelector} from "../hooks/redux";
-import {ITodos} from "../types/global";
-import {getUID} from "../helpers/getUID";
+import {ITodo} from "../types/global";
 import Todo from "../components/Todo";
-import {getDate} from "../helpers/getDate";
 import {DownOutlined} from '@ant-design/icons';
+import TodosFormCreate from "../components/TodosFormCreate";
+import {getTodoDonePercent} from "../helpers/getTodoDonePercent";
 
 const TodosPage: FC = () => {
-    const sortValues = {
-        all: 'All todos',
-        done: 'Done todos',
-        notDone: 'Not done todos',
-    }
     const dispatch = useTypedDispatch()
     const {todos} = useTypedSelector(state => state.todos)
-    const {getTodos, createTodo} = todoSliceAction
+    const {lang} = useTypedSelector(state => state.lang)
+    const sortValues = {
+        all: lang.allTodos,
+        done: lang.doneTodos,
+        notDone: lang.notDoneTodos,
+    }
+    const {getTodos} = todoSliceAction
     const [sortValue, setSortValue] = useState(sortValues.all)
 
     useEffect(() => {
         dispatch(getTodos())
     }, [])
 
-    const sortTodos: ITodos[] = useMemo(() => {
+    const sortTodos: ITodo[] = useMemo(() => {
         if (sortValue === sortValues.done) {
-            return [...todos].filter((todo: ITodos) => !todo.isDone)
+            return [...todos].filter((todo: ITodo) => todo.isDone)
         } else if (sortValue === sortValues.notDone) {
-            return [...todos].filter((todo: ITodos) => todo.isDone)
+            return [...todos].filter((todo: ITodo) => !todo.isDone)
         } else {
             return todos
         }
     }, [sortValue, todos])
+
 
     const menu: ReactElement = (
         <Menu
@@ -46,24 +48,16 @@ const TodosPage: FC = () => {
         />
     );
 
-    const createNewTodo = () => {
-        const newTodo: ITodos = {
-            id: getUID(),
-            createdAt: getDate(),
-            title: prompt() || 'Без Названия',
-            description: prompt() || 'Без описания',
-            isDone: false,
-        }
-        dispatch(createTodo(newTodo))
-    }
 
     return (
-        <Layout style={{padding: '1rem 0'}}>
+        <Layout className={'page'}>
             <AnimPage>
+                <h1 style={{textAlign: 'center'}}>{lang.todos}</h1>
+                <Divider/>
                 <Row gutter={[32, 16]} align={'top'}>
-                    <Col><h2>Todos</h2></Col>
-                    <Col><Button type={'primary'} onClick={createNewTodo}>Add</Button></Col>
-                    <Col style={{paddingTop: 4}}>
+                    <Col>
+                        <TodosFormCreate/>
+                        <Divider/>
                         <Dropdown overlay={menu}>
                             <Space>
                                 {sortValue}
@@ -71,12 +65,18 @@ const TodosPage: FC = () => {
                             </Space>
                         </Dropdown>
                     </Col>
+                    <Col>
+                        <Progress percent={getTodoDonePercent(todos)} format={percent => `${percent}% ${lang.done}`}
+                                  type="circle"/>
+                    </Col>
                 </Row>
+
                 <Divider/>
+
                 <Row gutter={[16, 16]}>
-                    {sortTodos && sortTodos.map((todo: ITodos) =>
-                        <Todo key={todo.id} todo={todo}/>
-                    )}
+                    {sortTodos.length > 0
+                        ? sortTodos && sortTodos.map((todo: ITodo) => <Todo key={todo.id} todo={todo}/>)
+                        : <Empty/>}
                 </Row>
 
             </AnimPage>

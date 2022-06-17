@@ -1,8 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {todoSliceReducer} from "./slices/todosSlice";
+import {langSliceReducer} from "./slices/langSlice";
 
 export const rootReducer = combineReducers({
     todos: todoSliceReducer,
+    lang: langSliceReducer,
 })
 
 export const store = configureStore({

@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
 import {ITask, ITodo} from "../types/global";
-import {Card, Checkbox, Col, Collapse, Row, Space, Timeline} from "antd";
+import {Card, Checkbox, Col, Collapse, Row, Space, Timeline, Typography} from "antd";
 import TodoBtns from "./TodoBtns";
 import {todoSliceAction} from "../redux/slices/todosSlice";
 import {useTypedDispatch, useTypedSelector} from "../hooks/redux";
 
 const {Panel} = Collapse;
+const {Title, Text} = Typography;
 
 interface IProps {
     todo: ITodo,
@@ -33,11 +34,11 @@ const Todo: FC<IProps> = ({todo}) => {
              style={{order: todo.isDone ? 2 : 0, transition: 'all linear 0.3s'}}
         >
             <Card
-                title={<div>{lang.todoName}: {todo.isDone ? <s>{todo.title}</s> : todo.title}</div>}
+                title={<Title level={4}>{lang.todoName}: {todo.isDone ? <s>{todo.title}</s> : todo.title}</Title>}
             >
-                <div>
+                <Text>
                     {lang.createdAt} — {todo.isDone ? <s>{todo.createdAt}</s> : todo.createdAt}
-                </div>
+                </Text>
 
                 <Row style={{margin: '1rem 0'}}>
                     <Collapse collapsible="header">

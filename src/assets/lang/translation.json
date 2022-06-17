@@ -9,7 +9,7 @@
     "doneTodos": "Выполненные задачи",
     "notDoneTodos": "Не выполненные задачи",
     "addTodo": "Добавить задачу",
-    "todoName": "Название задачи",
+    "todoName": "Название",
     "createdAt": "Создано",
     "delete": "Удалить",
     "open": "Открыть",
@@ -24,7 +24,12 @@
     "actions": "Действия",
     "done": "Сделано",
     "createTodoTitle": "Создай свою задачу",
-    "changeTodoTitle": "Изменяй задачу"
+    "changeTodoTitle": "Изменяй задачу",
+    "weather": "Погода",
+    "loading": "Загрузка",
+    "error": "Ошибка",
+    "todayWeather": "Сегодня",
+    "futureWeather": "На 5 дней"
   },
   "en": {
     "language": "English",
@@ -36,7 +41,7 @@
     "doneTodos": "Done todos",
     "notDoneTodos": "Not done Todos",
     "addTodo": "Add todo",
-    "todoName": "Todo name",
+    "todoName": "Title",
     "createdAt": "Created at",
     "delete": "Delete",
     "open": "Open",
@@ -51,6 +56,11 @@
     "actions": "Actions",
     "done": "Done",
     "createTodoTitle": "Create your todo",
-    "changeTodoTitle": "Change your todo"
+    "changeTodoTitle": "Change your todo",
+    "weather": "Weather",
+    "loading": "Loading",
+    "error": "Error",
+    "todayWeather": "Today",
+    "futureWeather": "For next 5 days"
   }
 }

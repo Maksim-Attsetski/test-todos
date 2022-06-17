@@ -19,6 +19,7 @@ const HeaderComponent: FC = () => {
     const headerLinks: IHeaderLinks[] = [
         {to: routeNames.HOME, text: lang.home},
         {to: routeNames.TODOS, text: lang.todos},
+        {to: routeNames.WEATHER, text: lang.weather},
         {to: routeNames.SETTING, text: lang.settings},
     ]
     const items = headerLinks.map((link: IHeaderLinks) => {

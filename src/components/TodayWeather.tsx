@@ -1,33 +1,23 @@
 import React, {FC, useEffect, useMemo} from 'react';
+import {Col, Row} from "antd";
+import IsLoading from "./H-O-C/isLoading";
 import {useTypedSelector} from "../hooks/redux";
 import {weatherApi} from "../redux/async/weatherApi";
-import IsLoading from "./H-O-C/isLoading";
-import {Col, Row} from "antd";
 
-const WeatherWidget: FC = () => {
+const TodayWeather: FC = () => {
     const {lang} = useTypedSelector(state => state.lang)
     const {data: todayWeather, isLoading, isError} = weatherApi.useGetCurrentWeatherQuery(1)
-    const {data: futureWeather, isLoading: loading, isError: error} = weatherApi.useGetFutureWeatherQuery(1)
     //         const sunTime = response.city.sunrise
     //         const date = new Date(sunTime)
     //         console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`)
 
-    const isCurrentLoading: boolean = useMemo(() => {
-        return isLoading && loading
-    }, [isLoading])
-    const isCurrentError: boolean = useMemo(() => {
-        return isError && error
-    }, [isError])
-
     useEffect(() => {
-        if (!todayWeather && !futureWeather) return
+        if (!todayWeather) return
         console.log(todayWeather)
-        console.log(futureWeather)
-    }, [isCurrentLoading])
-
+    }, [isLoading])
 
     return (
-        <IsLoading isError={isCurrentError} isLoading={isCurrentLoading}>
+        <IsLoading isError={isLoading} isLoading={isError}>
             <div>
                 {todayWeather &&
                     <Row gutter={[16, 16]}>
@@ -40,4 +30,4 @@ const WeatherWidget: FC = () => {
     );
 };
 
-export default WeatherWidget;
+export default TodayWeather;

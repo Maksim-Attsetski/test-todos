@@ -1,7 +1,11 @@
+const project: string = '/test-todos';
 
-export enum routeNames {
-    HOME = '/test-todos/',
-    NOT_FOUND = '/test-todos/*',
-    TODOS = '/test-todos/todos/',
-    SETTING = '/test-todos/setting/',
+export const routeNames = {
+    HOME: `${project}/`,
+    NOT_FOUND: `${project}/*`,
+    TODOS: `${project}/todos/`,
+    SETTING: `${project}/setting/`,
+    WEATHER: `${project}/weather/`,
+    TODAY_WEATHER: `${project}/weather/today/`,
+    FUTURE_WEATHER: `${project}/weather/future/`,
 }

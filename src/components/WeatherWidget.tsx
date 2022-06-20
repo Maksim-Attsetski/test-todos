@@ -1,42 +1,28 @@
-import React, {FC, useEffect, useMemo} from 'react';
-import {useTypedSelector} from "../hooks/redux";
-import {weatherApi} from "../redux/async/weatherApi";
-import IsLoading from "./H-O-C/isLoading";
-import {Col, Row} from "antd";
+import React, {FC} from 'react';
+import {IWeather} from "../types/global";
+import {Card, Col, Row, Typography} from "antd";
 
-const WeatherWidget: FC = () => {
-    const {lang} = useTypedSelector(state => state.lang)
-    const {data: todayWeather, isLoading, isError} = weatherApi.useGetCurrentWeatherQuery(1)
-    const {data: futureWeather, isLoading: loading, isError: error} = weatherApi.useGetFutureWeatherQuery(1)
-    //         const sunTime = response.city.sunrise
-    //         const date = new Date(sunTime)
-    //         console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`)
+const {Title} = Typography
 
-    const isCurrentLoading: boolean = useMemo(() => {
-        return isLoading && loading
-    }, [isLoading])
-    const isCurrentError: boolean = useMemo(() => {
-        return isError && error
-    }, [isError])
+interface IProps {
+    weather: IWeather
+}
 
-    useEffect(() => {
-        if (!todayWeather && !futureWeather) return
-        console.log(todayWeather)
-        console.log(futureWeather)
-    }, [isCurrentLoading])
-
+const WeatherWidget: FC<IProps> = ({weather}) => {
 
     return (
-        <IsLoading isError={isCurrentError} isLoading={isCurrentLoading}>
-            <div>
-                {todayWeather &&
-                    <Row gutter={[16, 16]}>
-                        <Col>{todayWeather?.name}</Col>
-                        <Col>{todayWeather?.clouds?.all}%</Col>
-                        <Col>{JSON.stringify(todayWeather)}</Col>
-                    </Row>}
-            </div>
-        </IsLoading>
+        <Card title={<Title level={4} style={{textAlign: 'center'}}>{weather?.date}</Title>}>
+            <Row gutter={[8, 8]} className={'column'}>
+                <Row>Чувствуется как {weather?.feelLike} °С</Row>
+                <Row gutter={[16, 16]} justify={'space-around'}>
+                    <Col>{weather?.temp} °C</Col>
+                    <Col>min {weather?.minTemp} °C — max {weather?.maxTemp} °C</Col>
+                </Row>
+            </Row>
+            <Row>Облачность — {weather?.clouds}%</Row>
+            <Row>Скорость ветра: {weather?.windSpeed} m/s</Row>
+            <Row>Направление ветра: {weather?.windDir}</Row>
+        </Card>
     );
 };
 

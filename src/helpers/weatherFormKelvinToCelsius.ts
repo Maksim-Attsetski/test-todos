@@ -1,5 +1,4 @@
 
 export const weatherFormKelvinToCelsius = (kelvin: number): number => {
-    const celsius: number = kelvin - 273
-    return +celsius.toFixed(1)
+    return +(kelvin - 273.15).toFixed(1)
 }

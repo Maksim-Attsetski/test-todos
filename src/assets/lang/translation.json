@@ -26,10 +26,11 @@
     "createTodoTitle": "Создай свою задачу",
     "changeTodoTitle": "Изменяй задачу",
     "weather": "Погода",
+    "lookWeatherOn": "Посмотреть погоду на",
     "loading": "Загрузка",
     "error": "Ошибка",
-    "todayWeather": "Сегодня",
-    "futureWeather": "На 5 дней",
+    "todayWeather": "сегодня",
+    "futureWeather": "5 дней",
     "clouds": "Облачность"
   },
   "en": {
@@ -59,10 +60,11 @@
     "createTodoTitle": "Create your todo",
     "changeTodoTitle": "Change your todo",
     "weather": "Weather",
+    "lookWeatherOn": "See the weather for",
     "loading": "Loading",
     "error": "Error",
-    "todayWeather": "Today",
-    "futureWeather": "For next 5 days",
+    "todayWeather": "today",
+    "futureWeather": "5 days",
     "clouds": "Clouds"
   }
 }

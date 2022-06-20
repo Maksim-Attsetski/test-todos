@@ -65,6 +65,9 @@
   }
 }
 
+.column {
+  flex-direction: column;
+}
 
 :root {
   --headerHeight: 64px;

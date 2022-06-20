@@ -18,7 +18,7 @@ const IsLoading: FC<IProps> = ({isLoading, isError, children}) => {
     </Row>)
 
     if (isLoading) return getCenterEl(`${lang.loading}...`)
-    if (isError) return getCenterEl(`${lang.error}...`)
+    if (isError) return getCenterEl(`${lang.error}`)
     else return <div>{children}</div>
 };
 

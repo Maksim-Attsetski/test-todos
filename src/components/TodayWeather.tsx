@@ -1,40 +1,42 @@
-import React, {FC, useEffect, useMemo} from 'react';
-import {Col, Row} from "antd";
+import React, {FC, useMemo} from 'react';
+import {Col, Row, Typography} from "antd";
 import IsLoading from "./H-O-C/isLoading";
-import {useTypedSelector} from "../hooks/redux";
 import {weatherApi} from "../redux/async/weatherApi";
 import {weatherFormKelvinToCelsius} from "../helpers/weatherFormKelvinToCelsius";
 import {getDate} from "../helpers/getDate";
+import {getWindDirection} from "../helpers/getWindDirection";
+import WeatherWidget from "./WeatherWidget";
+import {IWeather} from "../types/global";
 
 const TodayWeather: FC = () => {
-    const {lang} = useTypedSelector(state => state.lang)
-    const {data: todayWeather, isLoading, isError} = weatherApi.useGetCurrentWeatherQuery(1)
-    //         const sunTime = response.city.sunrise
-    //         const date = new Date(sunTime)
-    //         console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`)
+    const {data, isLoading, isError} = weatherApi.useGetCurrentWeatherQuery(1)
 
-    useEffect(() => {
-        if (!todayWeather) return
-        console.log(todayWeather)
-    }, [isLoading])
+    const weather: IWeather = useMemo(() => {
+        if (isLoading) return {} as IWeather
 
-    const feelLikes: number = useMemo(() => weatherFormKelvinToCelsius(todayWeather?.main?.feels_like), [todayWeather])
-    const sunRise: string = useMemo(() => getDate(todayWeather?.sys?.sunrise), [todayWeather])
-    const sunSet: string = useMemo(() => getDate(todayWeather?.sys?.sunset), [todayWeather])
+        return {
+            temp: weatherFormKelvinToCelsius(data?.main?.temp),
+            feelLike: weatherFormKelvinToCelsius(data?.main?.feels_like),
+            maxTemp: weatherFormKelvinToCelsius(data?.main?.temp_max),
+            minTemp: weatherFormKelvinToCelsius(data?.main?.temp_min),
+            date: getDate(),
+            icon: `http://openweathermap.org/img/wn/${data?.weather[0]?.icon}@2x.png`,
+            clouds: data?.clouds?.all,
+            windDir: getWindDirection(data.wind.deg),
+            windSpeed: data.wind.speed,
+        }
+    }, [data])
 
     return (
         <IsLoading isError={isError} isLoading={isLoading}>
             <div>
-                {todayWeather &&
-                    <Row gutter={[16, 16]}>
-                        <Col>{todayWeather?.name}, {todayWeather?.sys?.country}</Col>
-                        <Col>{lang.clouds} — {todayWeather?.clouds?.all}%</Col>
-                        <Col>Чувствуется как {feelLikes} °C</Col>
-                        <Col>Восход {sunRise}</Col>
-                        <Col>Закат {sunSet}</Col>
-
-                        <Col>{JSON.stringify(todayWeather)}</Col>
-                    </Row>}
+                {data && <Row gutter={[16, 16]} className={'column'} align={'middle'}>
+                    <Col>
+                        <Typography.Title level={3} style={{marginBottom: 0}}
+                        >{data?.name}, {data?.sys?.country}</Typography.Title>
+                    </Col>
+                    <Col><WeatherWidget weather={weather}/></Col>
+                </Row>}
             </div>
         </IsLoading>
     );

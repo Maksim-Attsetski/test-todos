@@ -1,3 +1,4 @@
+import { Typography } from 'antd';
 import React, {FC} from 'react';
 import AnimPage from "../components/H-O-C/AnimPage";
 import {useTypedSelector} from "../hooks/redux";
@@ -7,7 +8,9 @@ const NotFoundedPage: FC = () => {
 
     return (
         <AnimPage>
-            <strong>404</strong> {lang.pageIsNotFound}
+            <Typography.Title>
+                <strong>404</strong> {lang.pageIsNotFound}
+            </Typography.Title>
         </AnimPage>
     );
 };

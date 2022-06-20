@@ -1,4 +1,4 @@
-import {Button, Col, Divider, Row} from 'antd';
+import {Button, Col, Divider, Row, Typography} from 'antd';
 import React, {FC} from 'react';
 import AnimPage from "../components/H-O-C/AnimPage";
 import {useTypedSelector} from "../hooks/redux";
@@ -12,17 +12,16 @@ const WeatherPage: FC = () => {
         <AnimPage className={'page'}>
             <Row>
                 <Col>
-                    <h1>{lang.weather}</h1>
-                    <Button type={'primary'}>
+                    <Typography.Title>{lang.weather}</Typography.Title>
+                    <Button type={'primary'} style={{marginRight: 15}}>
                         <Link to={routeNames.TODAY_WEATHER}>{lang.todayWeather}</Link>
                     </Button>
                     <Button type={'primary'}>
                         <Link to={routeNames.FUTURE_WEATHER}>{lang.futureWeather}</Link>
                     </Button>
-
                 </Col>
+                <Divider/>
                 <Col>
-                    <Divider/>
                     <Outlet/>
                 </Col>
             </Row>

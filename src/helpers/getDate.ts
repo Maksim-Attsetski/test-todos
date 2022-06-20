@@ -1,5 +1,5 @@
 
-export const getDate = (): string => {
+export const getDate = (custom = ''): string => {
     const date = new Date()
 
     const day = date.getDay() >= 10 ? date.getDay() : `0${date.getDay()}`

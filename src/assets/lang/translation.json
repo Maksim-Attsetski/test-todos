@@ -29,7 +29,8 @@
     "loading": "Загрузка",
     "error": "Ошибка",
     "todayWeather": "Сегодня",
-    "futureWeather": "На 5 дней"
+    "futureWeather": "На 5 дней",
+    "clouds": "Облачность"
   },
   "en": {
     "language": "English",
@@ -61,6 +62,7 @@
     "loading": "Loading",
     "error": "Error",
     "todayWeather": "Today",
-    "futureWeather": "For next 5 days"
+    "futureWeather": "For next 5 days",
+    "clouds": "Clouds"
   }
 }

@@ -1,6 +1,6 @@
 import React, {FC, ReactElement, useEffect, useMemo, useState} from 'react';
 import AnimPage from "../components/H-O-C/AnimPage";
-import {Col, Divider, Dropdown, Empty, Layout, Menu, Progress, Row, Space} from "antd";
+import {Col, Divider, Dropdown, Empty, Layout, Menu, Progress, Row, Space, Typography} from "antd";
 import {todoSliceAction} from "../redux/slices/todosSlice";
 import {useTypedDispatch, useTypedSelector} from "../hooks/redux";
 import {ITodo} from "../types/global";
@@ -52,7 +52,7 @@ const TodosPage: FC = () => {
     return (
         <Layout className={'page'}>
             <AnimPage>
-                <h1 style={{textAlign: 'center'}}>{lang.todos}</h1>
+                <Typography.Title style={{textAlign: 'center'}}>{lang.todos}</Typography.Title>
                 <Divider/>
                 <Row gutter={[32, 16]} align={'top'}>
                     <Col>

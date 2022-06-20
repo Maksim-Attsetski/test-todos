@@ -17,7 +17,7 @@ const FutureWeather: FC = () => {
     }, [isLoading])
 
     return (
-        <IsLoading isError={isLoading} isLoading={isError}>
+        <IsLoading isError={isError} isLoading={isLoading}>
             <div>
                 {futureWeather &&
                     <Row gutter={[16, 16]}>

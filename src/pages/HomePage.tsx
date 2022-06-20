@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import AnimPage from "../components/H-O-C/AnimPage";
 import {routeNames} from "../routes/routeNames";
 import {Link} from 'react-router-dom';
-import {Row} from 'antd';
+import {Row, Typography} from 'antd';
 import {useTypedSelector} from "../hooks/redux";
 
 const HomePage: FC = () => {
@@ -11,7 +11,9 @@ const HomePage: FC = () => {
     return (
         <AnimPage>
             <Row align={'middle'} justify={'center'} className={'page'}>
-                <h1 style={{textAlign: 'center'}}><Link to={routeNames.TODOS}>{lang.homePageTitle}</Link></h1>
+                <Typography.Title style={{textAlign: 'center'}}>
+                    <Link to={routeNames.TODOS}>{lang.homePageTitle}</Link>
+                </Typography.Title>
             </Row>
         </AnimPage>
     );

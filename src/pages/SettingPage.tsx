@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import {Col, Divider, Dropdown, Layout, Menu, Row, Space} from "antd";
+import {Col, Divider, Dropdown, Layout, Menu, Row, Space, Typography} from "antd";
 import AnimPage from "../components/H-O-C/AnimPage";
 import {DownOutlined} from "@ant-design/icons";
 import {useTypedDispatch, useTypedSelector} from "../hooks/redux";
@@ -21,7 +21,7 @@ const SettingPage: FC = () => {
             <AnimPage>
                 <Row>
                     <Col>
-                        <h1>{lang.settings}</h1>
+                        <Typography.Title>{lang.settings}</Typography.Title>
                         <Divider/>
                         <Dropdown overlay={dropdown}>
                             <Space>

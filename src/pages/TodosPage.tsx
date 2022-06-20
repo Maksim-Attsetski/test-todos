@@ -9,6 +9,7 @@ import {DownOutlined} from '@ant-design/icons';
 import TodosFormCreate from "../components/TodosFormCreate";
 import {getTodoDonePercent} from "../helpers/getTodoDonePercent";
 
+const {Title, Text} = Typography
 const TodosPage: FC = () => {
     const dispatch = useTypedDispatch()
     const {todos} = useTypedSelector(state => state.todos)
@@ -52,22 +53,26 @@ const TodosPage: FC = () => {
     return (
         <Layout className={'page'}>
             <AnimPage>
-                <Typography.Title style={{textAlign: 'center'}}>{lang.todos}</Typography.Title>
+                <Title style={{textAlign: 'center'}}>{lang.todos}</Title>
                 <Divider/>
                 <Row gutter={[32, 16]} align={'top'}>
                     <Col>
                         <TodosFormCreate/>
                         <Divider/>
-                        <Dropdown overlay={menu}>
-                            <Space>
-                                {sortValue}
-                                <DownOutlined/>
-                            </Space>
-                        </Dropdown>
+                        {todos.length === 0
+                            ? <Text>{sortValues.all}</Text>
+                            : <Dropdown overlay={menu}>
+                                <Space>
+                                    {sortValue}
+                                    <DownOutlined/>
+                                </Space>
+                            </Dropdown>}
                     </Col>
                     <Col>
-                        <Progress percent={getTodoDonePercent(todos)} format={percent => `${percent}% ${lang.done}`}
-                                  type="circle"/>
+                        <Progress
+                            percent={getTodoDonePercent(todos)}
+                            format={percent => todos.length > 0 ? `${percent}% ${lang.done}` : lang.noTasks}
+                            type="circle"/>
                     </Col>
                 </Row>
 
@@ -76,7 +81,7 @@ const TodosPage: FC = () => {
                 <Row gutter={[16, 16]}>
                     {sortTodos.length > 0
                         ? sortTodos && sortTodos.map((todo: ITodo) => <Todo key={todo.id} todo={todo}/>)
-                        : <Empty/>}
+                        : <Empty description={lang.noTasks} />}
                 </Row>
 
             </AnimPage>

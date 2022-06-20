@@ -5,8 +5,11 @@ interface IState {
     lang: any,
 }
 
+const langFromLS: string = localStorage.getItem('lang') || 'ru'
+
 const initialState: IState = {
-    lang: lang['ru'],
+// @ts-ignore
+    lang: lang[langFromLS],
 }
 
 const langSlice = createSlice({
@@ -16,6 +19,7 @@ const langSlice = createSlice({
         changeLang: (state, action: PayloadAction<string>) => {
             // @ts-ignore
             state.lang = lang[action.payload]
+            localStorage.setItem('lang', action.payload)
         }
     }
 })

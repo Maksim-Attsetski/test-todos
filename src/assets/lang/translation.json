@@ -31,7 +31,8 @@
     "error": "Ошибка",
     "todayWeather": "сегодня",
     "futureWeather": "5 дней",
-    "clouds": "Облачность"
+    "clouds": "Облачность",
+    "noTasks": "Нет задач"
   },
   "en": {
     "language": "English",
@@ -65,6 +66,7 @@
     "error": "Error",
     "todayWeather": "today",
     "futureWeather": "5 days",
-    "clouds": "Clouds"
+    "clouds": "Clouds",
+    "noTasks": "No tasks"
   }
 }
